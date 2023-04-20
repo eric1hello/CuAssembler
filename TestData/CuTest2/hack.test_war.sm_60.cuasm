@@ -1,0 +1,783 @@
+// --------------------- FileHeader --------------------------
+	// All file header info is kept as is (unless offset/size attributes)
+	// The original header flags is not complete, thus discarded. 
+	// 	.headerflags	@"EF_CUDA_TEXMODE_UNIFIED EF_CUDA_64BIT_ADDRESS EF_CUDA_SM60 EF_CUDA_VIRTUAL_SM(EF_CUDA_SM60)"
+	// 	.elftype	@"ET_EXEC"
+	// 
+	// 
+	.__elf_ident_osabi      51
+	.__elf_ident_abiversion 7
+	.__elf_type             ET_EXEC
+	.__elf_machine          EM_CUDA
+	.__elf_version          110 		// CUDA toolkit version 
+	.__elf_entry            0 		// entry point address 
+	.__elf_phoff            0x1260 		// program header offset, maybe updated by assembler
+	.__elf_shoff            0x1060 		// section header offset, maybe updated by assembler
+	.__elf_flags            0x3c053c 		// Flags, SM_60(0x3c), COMPUTE_60(0x3c) 
+	.__elf_ehsize           64 		// elf header size 
+	.__elf_phentsize        56 		// program entry size
+	.__elf_phnum            3 		// number of program entries
+	.__elf_shentsize        64 		// section entry size
+	.__elf_shnum            8 		// number of sections, currently no sections can be appended/removed
+	.__elf_shstrndx         1 		// Section name string table index 
+
+
+  //-------------------------------------------------
+  //------------ END of FileHeader ------------------
+  //-------------------------------------------------
+
+
+
+// ---------------------                                  --------------------------
+	// there will always be an empty section at index 0
+	.section  "", 0, SHT_NULL
+	.__section_name         0x0 	// offset in .shstrtab
+	.__section_type         SHT_NULL
+	.__section_flags        0x0
+	.__section_addr         0x0
+	.__section_offset       0x0 	// maybe updated by assembler
+	.__section_size         0x0 	// maybe updated by assembler
+	.__section_link         0
+	.__section_info         0x0
+	.__section_entsize      0
+	.align                0 	// equivalent to set sh_addralign
+
+// --------------------- .shstrtab                        --------------------------
+	.section  ".shstrtab", 0, SHT_STRTAB
+	// all strings in .shstrtab section will be kept as is.
+	.__section_name         0x1 	// offset in .shstrtab
+	.__section_type         SHT_STRTAB
+	.__section_flags        0x0
+	.__section_addr         0x0
+	.__section_offset       0x40 	// maybe updated by assembler
+	.__section_size         0xaa 	// maybe updated by assembler
+	.__section_link         0
+	.__section_info         0x0
+	.__section_entsize      0
+	.align                1 	// equivalent to set sh_addralign
+    // .shstrtab[0] = b'\x00' 
+    /*0000*/ .byte 0x00
+
+    // .shstrtab[1] = b'.shstrtab\x00' 
+    /*0001*/ .byte 0x2e, 0x73, 0x68, 0x73, 0x74, 0x72, 0x74, 0x61
+    /*0009*/ .byte 0x62, 0x00
+
+    // .shstrtab[2] = b'.strtab\x00' 
+    /*000b*/ .byte 0x2e, 0x73, 0x74, 0x72, 0x74, 0x61, 0x62, 0x00
+
+    // .shstrtab[3] = b'.symtab\x00' 
+    /*0013*/ .byte 0x2e, 0x73, 0x79, 0x6d, 0x74, 0x61, 0x62, 0x00
+
+    // .shstrtab[4] = b'.symtab_shndx\x00' 
+    /*001b*/ .byte 0x2e, 0x73, 0x79, 0x6d, 0x74, 0x61, 0x62, 0x5f
+    /*0023*/ .byte 0x73, 0x68, 0x6e, 0x64, 0x78, 0x00
+
+    // .shstrtab[5] = b'.nv.info\x00' 
+    /*0029*/ .byte 0x2e, 0x6e, 0x76, 0x2e, 0x69, 0x6e, 0x66, 0x6f
+    /*0031*/ .byte 0x00
+
+    // .shstrtab[6] = b'.text._Z9matrixAddPKiiiPi\x00' 
+    /*0032*/ .byte 0x2e, 0x74, 0x65, 0x78, 0x74, 0x2e, 0x5f, 0x5a
+    /*003a*/ .byte 0x39, 0x6d, 0x61, 0x74, 0x72, 0x69, 0x78, 0x41
+    /*0042*/ .byte 0x64, 0x64, 0x50, 0x4b, 0x69, 0x69, 0x69, 0x50
+    /*004a*/ .byte 0x69, 0x00
+
+    // .shstrtab[7] = b'.nv.info._Z9matrixAddPKiiiPi\x00' 
+    /*004c*/ .byte 0x2e, 0x6e, 0x76, 0x2e, 0x69, 0x6e, 0x66, 0x6f
+    /*0054*/ .byte 0x2e, 0x5f, 0x5a, 0x39, 0x6d, 0x61, 0x74, 0x72
+    /*005c*/ .byte 0x69, 0x78, 0x41, 0x64, 0x64, 0x50, 0x4b, 0x69
+    /*0064*/ .byte 0x69, 0x69, 0x50, 0x69, 0x00
+
+    // .shstrtab[8] = b'.nv.shared._Z9matrixAddPKiiiPi\x00' 
+    /*0069*/ .byte 0x2e, 0x6e, 0x76, 0x2e, 0x73, 0x68, 0x61, 0x72
+    /*0071*/ .byte 0x65, 0x64, 0x2e, 0x5f, 0x5a, 0x39, 0x6d, 0x61
+    /*0079*/ .byte 0x74, 0x72, 0x69, 0x78, 0x41, 0x64, 0x64, 0x50
+    /*0081*/ .byte 0x4b, 0x69, 0x69, 0x69, 0x50, 0x69, 0x00
+
+    // .shstrtab[9] = b'.nv.constant0._Z9matrixAddPKiiiPi\x00' 
+    /*0088*/ .byte 0x2e, 0x6e, 0x76, 0x2e, 0x63, 0x6f, 0x6e, 0x73
+    /*0090*/ .byte 0x74, 0x61, 0x6e, 0x74, 0x30, 0x2e, 0x5f, 0x5a
+    /*0098*/ .byte 0x39, 0x6d, 0x61, 0x74, 0x72, 0x69, 0x78, 0x41
+    /*00a0*/ .byte 0x64, 0x64, 0x50, 0x4b, 0x69, 0x69, 0x69, 0x50
+    /*00a8*/ .byte 0x69, 0x00
+
+
+// --------------------- .strtab                          --------------------------
+	.section  ".strtab", 0, SHT_STRTAB
+	// all strings in .strtab section will be kept as is.
+	.__section_name         0xb 	// offset in .shstrtab
+	.__section_type         SHT_STRTAB
+	.__section_flags        0x0
+	.__section_addr         0x0
+	.__section_offset       0xea 	// maybe updated by assembler
+	.__section_size         0xc5 	// maybe updated by assembler
+	.__section_link         0
+	.__section_info         0x0
+	.__section_entsize      0
+	.align                1 	// equivalent to set sh_addralign
+    // .strtab[0] = b'\x00' 
+    /*0000*/ .byte 0x00
+
+    // .strtab[1] = b'.shstrtab\x00' 
+    /*0001*/ .byte 0x2e, 0x73, 0x68, 0x73, 0x74, 0x72, 0x74, 0x61
+    /*0009*/ .byte 0x62, 0x00
+
+    // .strtab[2] = b'.strtab\x00' 
+    /*000b*/ .byte 0x2e, 0x73, 0x74, 0x72, 0x74, 0x61, 0x62, 0x00
+
+    // .strtab[3] = b'.symtab\x00' 
+    /*0013*/ .byte 0x2e, 0x73, 0x79, 0x6d, 0x74, 0x61, 0x62, 0x00
+
+    // .strtab[4] = b'.symtab_shndx\x00' 
+    /*001b*/ .byte 0x2e, 0x73, 0x79, 0x6d, 0x74, 0x61, 0x62, 0x5f
+    /*0023*/ .byte 0x73, 0x68, 0x6e, 0x64, 0x78, 0x00
+
+    // .strtab[5] = b'.nv.info\x00' 
+    /*0029*/ .byte 0x2e, 0x6e, 0x76, 0x2e, 0x69, 0x6e, 0x66, 0x6f
+    /*0031*/ .byte 0x00
+
+    // .strtab[6] = b'_Z9matrixAddPKiiiPi\x00' 
+    /*0032*/ .byte 0x5f, 0x5a, 0x39, 0x6d, 0x61, 0x74, 0x72, 0x69
+    /*003a*/ .byte 0x78, 0x41, 0x64, 0x64, 0x50, 0x4b, 0x69, 0x69
+    /*0042*/ .byte 0x69, 0x50, 0x69, 0x00
+
+    // .strtab[7] = b'.text._Z9matrixAddPKiiiPi\x00' 
+    /*0046*/ .byte 0x2e, 0x74, 0x65, 0x78, 0x74, 0x2e, 0x5f, 0x5a
+    /*004e*/ .byte 0x39, 0x6d, 0x61, 0x74, 0x72, 0x69, 0x78, 0x41
+    /*0056*/ .byte 0x64, 0x64, 0x50, 0x4b, 0x69, 0x69, 0x69, 0x50
+    /*005e*/ .byte 0x69, 0x00
+
+    // .strtab[8] = b'.nv.info._Z9matrixAddPKiiiPi\x00' 
+    /*0060*/ .byte 0x2e, 0x6e, 0x76, 0x2e, 0x69, 0x6e, 0x66, 0x6f
+    /*0068*/ .byte 0x2e, 0x5f, 0x5a, 0x39, 0x6d, 0x61, 0x74, 0x72
+    /*0070*/ .byte 0x69, 0x78, 0x41, 0x64, 0x64, 0x50, 0x4b, 0x69
+    /*0078*/ .byte 0x69, 0x69, 0x50, 0x69, 0x00
+
+    // .strtab[9] = b'.nv.shared._Z9matrixAddPKiiiPi\x00' 
+    /*007d*/ .byte 0x2e, 0x6e, 0x76, 0x2e, 0x73, 0x68, 0x61, 0x72
+    /*0085*/ .byte 0x65, 0x64, 0x2e, 0x5f, 0x5a, 0x39, 0x6d, 0x61
+    /*008d*/ .byte 0x74, 0x72, 0x69, 0x78, 0x41, 0x64, 0x64, 0x50
+    /*0095*/ .byte 0x4b, 0x69, 0x69, 0x69, 0x50, 0x69, 0x00
+
+    // .strtab[10] = b'.nv.constant0._Z9matrixAddPKiiiPi\x00' 
+    /*009c*/ .byte 0x2e, 0x6e, 0x76, 0x2e, 0x63, 0x6f, 0x6e, 0x73
+    /*00a4*/ .byte 0x74, 0x61, 0x6e, 0x74, 0x30, 0x2e, 0x5f, 0x5a
+    /*00ac*/ .byte 0x39, 0x6d, 0x61, 0x74, 0x72, 0x69, 0x78, 0x41
+    /*00b4*/ .byte 0x64, 0x64, 0x50, 0x4b, 0x69, 0x69, 0x69, 0x50
+    /*00bc*/ .byte 0x69, 0x00
+
+    // .strtab[11] = b'_param\x00' 
+    /*00be*/ .byte 0x5f, 0x70, 0x61, 0x72, 0x61, 0x6d, 0x00
+
+
+// --------------------- .symtab                          --------------------------
+	.section  ".symtab", 0, SHT_SYMTAB
+	// all symbols in .symtab sections will be kept
+	// but the symbol size may be changed accordingly
+	.__section_name         0x13 	// offset in .shstrtab
+	.__section_type         SHT_SYMTAB
+	.__section_flags        0x0
+	.__section_addr         0x0
+	.__section_offset       0x1b0 	// maybe updated by assembler
+	.__section_size         0x60 	// maybe updated by assembler
+	.__section_link         2
+	.__section_info         0x2
+	.__section_entsize      24
+	.align                8 	// equivalent to set sh_addralign
+    // Symbol[0] "": Container({'st_name': 0, 'st_info': Container({'bind': 'STB_LOCAL', 'type': 'STT_NOTYPE'}), 'st_other': Container({'local': 0, 'visibility': 'STV_DEFAULT'}), 'st_shndx': 'SHN_UNDEF', 'st_value': 0, 'st_size': 0})
+    /*0000*/ .byte 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
+    /*0008*/ .byte 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
+    /*0010*/ .byte 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
+
+    // Symbol[1] ".text._Z9matrixAddPKiiiPi": Container({'st_name': 70, 'st_info': Container({'bind': 'STB_LOCAL', 'type': 'STT_SECTION'}), 'st_other': Container({'local': 0, 'visibility': 'STV_DEFAULT'}), 'st_shndx': 7, 'st_value': 0, 'st_size': 0})
+    /*0018*/ .byte 0x46, 0x00, 0x00, 0x00, 0x03, 0x00, 0x07, 0x00
+    /*0020*/ .byte 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
+    /*0028*/ .byte 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
+
+    // Symbol[2] ".nv.constant0._Z9matrixAddPKiiiPi": Container({'st_name': 156, 'st_info': Container({'bind': 'STB_LOCAL', 'type': 'STT_SECTION'}), 'st_other': Container({'local': 0, 'visibility': 'STV_DEFAULT'}), 'st_shndx': 6, 'st_value': 0, 'st_size': 0})
+    /*0030*/ .byte 0x9c, 0x00, 0x00, 0x00, 0x03, 0x00, 0x06, 0x00
+    /*0038*/ .byte 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
+    /*0040*/ .byte 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
+
+    // Symbol[3] "_Z9matrixAddPKiiiPi": Container({'st_name': 50, 'st_info': Container({'bind': 'STB_GLOBAL', 'type': 'STT_FUNC'}), 'st_other': Container({'local': 0, 'visibility': 'STV_DEFAULT'}), 'st_shndx': 7, 'st_value': 0, 'st_size': 3136})
+    /*0048*/ .byte 0x32, 0x00, 0x00, 0x00, 0x12, 0x10, 0x07, 0x00
+    /*0050*/ .byte 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
+    /*0058*/ .byte 0x40, 0x0c, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
+
+
+// --------------------- .nv.info                         --------------------------
+	.section	.nv.info,"",@"SHT_CUDA_INFO"
+	.__section_name         0x29 	// offset in .shstrtab
+	.__section_type         1879048192
+	.__section_flags        0x0
+	.__section_addr         0x0
+	.__section_offset       0x210 	// maybe updated by assembler
+	.__section_size         0x30 	// maybe updated by assembler
+	.__section_link         3
+	.__section_info         0x0
+	.__section_entsize      0
+	.align                4 	// equivalent to set sh_addralign
+  	.align	4
+  
+  
+  	//----- nvinfo : EIATTR_REGCOUNT
+  	.align		4
+          /*0000*/ 	.byte	0x04, 0x2f
+          /*0002*/ 	.short	(.L_9 - .L_8)
+  	.align		4
+  .L_8:
+          /*0004*/ 	.word	index@(_Z9matrixAddPKiiiPi)
+          /*0008*/ 	.word	0x0000001e
+  
+  
+  	//----- nvinfo : EIATTR_MAX_STACK_SIZE
+  	.align		4
+  .L_9:
+          /*000c*/ 	.byte	0x04, 0x23
+          /*000e*/ 	.short	(.L_11 - .L_10)
+  	.align		4
+  .L_10:
+          /*0010*/ 	.word	index@(_Z9matrixAddPKiiiPi)
+          /*0014*/ 	.word	0x00000000
+  
+  
+  	//----- nvinfo : EIATTR_MIN_STACK_SIZE
+  	.align		4
+  .L_11:
+          /*0018*/ 	.byte	0x04, 0x12
+          /*001a*/ 	.short	(.L_13 - .L_12)
+  	.align		4
+  .L_12:
+          /*001c*/ 	.word	index@(_Z9matrixAddPKiiiPi)
+          /*0020*/ 	.word	0x00000000
+  
+  
+  	//----- nvinfo : EIATTR_FRAME_SIZE
+  	.align		4
+  .L_13:
+          /*0024*/ 	.byte	0x04, 0x11
+          /*0026*/ 	.short	(.L_15 - .L_14)
+  	.align		4
+  .L_14:
+          /*0028*/ 	.word	index@(_Z9matrixAddPKiiiPi)
+          /*002c*/ 	.word	0x00000000
+  .L_15:
+  
+  
+// --------------------- .nv.info._Z9matrixAddPKiiiPi     --------------------------
+	.section	.nv.info._Z9matrixAddPKiiiPi,"",@"SHT_CUDA_INFO"
+	.__section_name         0x4c 	// offset in .shstrtab
+	.__section_type         1879048192
+	.__section_flags        0x0
+	.__section_addr         0x0
+	.__section_offset       0x240 	// maybe updated by assembler
+	.__section_size         0x78 	// maybe updated by assembler
+	.__section_link         3
+	.__section_info         0x7
+	.__section_entsize      0
+	.align                4 	// equivalent to set sh_addralign
+  	.align	4
+  
+  
+  	//----- nvinfo : EIATTR_SW2393858_WAR
+  	.align		4
+          /*0000*/ 	.byte	0x01, 0x30
+  	.zero		2
+  
+  
+  	//----- nvinfo : EIATTR_SW1850030_WAR
+  	.align		4
+          /*0004*/ 	.byte	0x01, 0x2a
+  	.zero		2
+  
+  
+  	//----- nvinfo : EIATTR_PARAM_CBANK
+  	.align		4
+          /*0008*/ 	.byte	0x04, 0x0a
+          /*000a*/ 	.short	(.L_17 - .L_16)
+  	.align		4
+  .L_16:
+          /*000c*/ 	.word	index@(.nv.constant0._Z9matrixAddPKiiiPi)
+          /*0010*/ 	.short	0x0140
+          /*0012*/ 	.short	0x0018
+  
+  
+  	//----- nvinfo : EIATTR_CBANK_PARAM_SIZE
+  	.align		4
+  .L_17:
+          /*0014*/ 	.byte	0x03, 0x19
+          /*0016*/ 	.short	0x0018
+  
+  
+  	//----- nvinfo : EIATTR_KPARAM_INFO
+  	.align		4
+          /*0018*/ 	.byte	0x04, 0x17
+          /*001a*/ 	.short	(.L_19 - .L_18)
+  .L_18:
+          /*001c*/ 	.word	0x00000000
+          /*0020*/ 	.short	0x0003
+          /*0022*/ 	.short	0x0010
+          /*0024*/ 	.byte	0x00, 0xf0, 0x21, 0x00
+  
+  
+  	//----- nvinfo : EIATTR_KPARAM_INFO
+  	.align		4
+  .L_19:
+          /*0028*/ 	.byte	0x04, 0x17
+          /*002a*/ 	.short	(.L_21 - .L_20)
+  .L_20:
+          /*002c*/ 	.word	0x00000000
+          /*0030*/ 	.short	0x0002
+          /*0032*/ 	.short	0x000c
+          /*0034*/ 	.byte	0x00, 0xf0, 0x11, 0x00
+  
+  
+  	//----- nvinfo : EIATTR_KPARAM_INFO
+  	.align		4
+  .L_21:
+          /*0038*/ 	.byte	0x04, 0x17
+          /*003a*/ 	.short	(.L_23 - .L_22)
+  .L_22:
+          /*003c*/ 	.word	0x00000000
+          /*0040*/ 	.short	0x0001
+          /*0042*/ 	.short	0x0008
+          /*0044*/ 	.byte	0x00, 0xf0, 0x11, 0x00
+  
+  
+  	//----- nvinfo : EIATTR_KPARAM_INFO
+  	.align		4
+  .L_23:
+          /*0048*/ 	.byte	0x04, 0x17
+          /*004a*/ 	.short	(.L_25 - .L_24)
+  .L_24:
+          /*004c*/ 	.word	0x00000000
+          /*0050*/ 	.short	0x0000
+          /*0052*/ 	.short	0x0000
+          /*0054*/ 	.byte	0x00, 0xf0, 0x21, 0x00
+  
+  
+  	//----- nvinfo : EIATTR_MAXREG_COUNT
+  	.align		4
+  .L_25:
+          /*0058*/ 	.byte	0x03, 0x1b
+          /*005a*/ 	.short	0x00ff
+  
+  
+  	//----- nvinfo : EIATTR_S2RCTAID_INSTR_OFFSETS
+  	.align		4
+          /*005c*/ 	.byte	0x04, 0x1d
+          /*005e*/ 	.short	(.L_27 - .L_26)
+  
+  
+  	//   ....[0]....
+  .L_26:
+          /*0060*/ 	.word	0x00000018
+  
+  
+  	//----- nvinfo : EIATTR_EXIT_INSTR_OFFSETS
+  	.align		4
+  .L_27:
+          /*0064*/ 	.byte	0x04, 0x1c
+          /*0066*/ 	.short	(.L_29 - .L_28)
+  
+  
+  	//   ....[0]....
+  .L_28:
+          /*0068*/ 	.word	0x00000078
+  
+  
+  	//   ....[1]....
+          /*006c*/ 	.word	0x00000310
+  
+  
+  	//   ....[2]....
+          /*0070*/ 	.word	0x00000b28
+  
+  
+  	//   ....[3]....
+          /*0074*/ 	.word	0x00000c30
+  .L_29:
+  
+  
+// --------------------- .nv.constant0._Z9matrixAddPKiiiPi --------------------------
+	.section	.nv.constant0._Z9matrixAddPKiiiPi,"a",@progbits
+	.__section_name         0x88 	// offset in .shstrtab
+	.__section_type         SHT_PROGBITS
+	.__section_flags        0x2
+	.__section_addr         0x0
+	.__section_offset       0x2b8 	// maybe updated by assembler
+	.__section_size         0x158 	// maybe updated by assembler
+	.__section_link         0
+	.__section_info         0x7
+	.__section_entsize      0
+	.align                4 	// equivalent to set sh_addralign
+  	.align	4
+  .nv.constant0._Z9matrixAddPKiiiPi:
+  	.zero		344
+  
+  
+// --------------------- .text._Z9matrixAddPKiiiPi        --------------------------
+	.section	.text._Z9matrixAddPKiiiPi,"ax",@progbits
+	.__section_name         0x32 	// offset in .shstrtab
+	.__section_type         SHT_PROGBITS
+	.__section_flags        0x6
+	.__section_addr         0x0
+	.__section_offset       0x420 	// maybe updated by assembler
+	.__section_size         0xc40 	// maybe updated by assembler
+	.__section_link         3
+	.__section_info         0x1e000003
+	.__section_entsize      0
+	.align                32 	// equivalent to set sh_addralign
+  	.sectioninfo	@"SHI_REGISTERS=30"
+  	.align	32
+          .global         _Z9matrixAddPKiiiPi
+          .type           _Z9matrixAddPKiiiPi,@function
+          .size           _Z9matrixAddPKiiiPi,(.L_30 - _Z9matrixAddPKiiiPi)
+          .other          _Z9matrixAddPKiiiPi,@"STO_CUDA_ENTRY STV_DEFAULT"
+  _Z9matrixAddPKiiiPi:
+  .text._Z9matrixAddPKiiiPi:
+      [B------:R-:W-:-:S06]         /*0008*/                   MOV R1, c[0x0][0x20] ;
+      [B------:R-:W-:-:S00]         /*0010*/         {         MOV R5, c[0x0][0x14c] ;
+      [B------:R-:W0:-:S06]         /*0018*/                   S2R R2, SR_CTAID.X         }
+      [B------:R-:W-:-:S00]         /*0028*/         {         ISETP.GE.AND P0, PT, R5, 0x1, PT ;
+      [B------:R-:W1:-:S01]         /*0030*/                   S2R R0, SR_TID.X         }
+      [B0-----:R-:W-:-:S01]         /*0038*/                   XMAD.MRG R3, R2.reuse, c[0x0] [0x8].H1, RZ ;
+      [B-1----:R-:W-:-:S11]         /*0048*/                   XMAD R0, R2, c[0x0] [0x8], R0 ;
+      [B------:R-:W-:Y:S15]         /*0050*/                   NOP ;
+      [B------:R-:W-:Y:S15]         /*0058*/                   NOP ;
+      [B------:R-:W-:Y:S03]         /*0068*/                   NOP ;
+      [B------:R-:W-:-:S00]         /*0070*/         {         XMAD.PSL.CBCC R2, R2.H1, R3.H1, R0 ;
+      [B------:R-:W-:-:S13]         /*0078*/              @!P0 EXIT         }
+      [B------:R-:W-:Y:S01]         /*0088*/                   SHL R8, R2, 0x2 ;
+      [B------:R-:W-:-:S01]         /*0090*/                   LOP32I.AND R4, R5, 0x3 ;
+      [B------:R-:W-:Y:S04]         /*0098*/                   SHR R9, R2, 0x1e ;
+      [B------:R-:W-:-:S01]         /*00a8*/                   IADD R12.CC, R8, c[0x0][0x140] ;
+      [B------:R-:W-:Y:S05]         /*00b0*/                   ISETP.NE.AND P0, PT, R4, RZ, PT ;
+      [B------:R-:W-:Y:S01]         /*00b8*/                   IADD.X R13, R9, c[0x0][0x144] ;
+      [B------:R-:W-:Y:S01]         /*00c8*/                   IADD R8.CC, R8, c[0x0][0x150] ;
+      [B------:R-:W-:Y:S01]         /*00d0*/                   MOV R3, c[0x0][0x148] ;
+      [B------:R-:W-:Y:S05]         /*00d8*/                   MOV R0, RZ ;
+      [B------:R-:W-:-:S00]         /*00e8*/         {         IADD.X R9, R9, c[0x0][0x154] ;
+      [B------:R-:W-:-:S06]         /*00f0*/              @!P0 BRA `(.L_1)         }
+      [B------:R-:W-:Y:S13]         /*00f8*/                   ISETP.NE.AND P0, PT, R4, 0x1, PT ;
+      [B------:R-:W-:-:S00]         /*0108*/         {         SHR R0, R3, 0x1f ;
+      [B------:R-:W-:-:S13]         /*0110*/              @!P0 BRA `(.L_2)         }
+      [B------:R-:W-:Y:S13]         /*0118*/                   ISETP.NE.AND P0, PT, R4, 0x2, PT ;
+      [B------:R-:W-:-:S01]         /*0128*/               @P0 MOV R6, R12 ;
+      [B------:R-:W-:-:S02]         /*0130*/               @P0 MOV R7, R13 ;
+      [B------:R0:W5:-:S01]         /*0138*/               @P0 LDG.E R4, [R6] ;
+      [B------:R-:W-:-:S06]         /*0148*/               @P0 IADD R2, R2, c[0x0][0x148] ;
+      [B------:R-:W-:-:S01]         /*0150*/               @P0 SHL R11, R2.reuse, 0x2 ;
+      [B------:R-:W-:Y:S05]         /*0158*/               @P0 SHR R14, R2, 0x1e ;
+      [B------:R-:W-:-:S01]         /*0168*/               @P0 IADD R12.CC, R11.reuse, c[0x0][0x140] ;
+      [B0-----:R-:W-:-:S01]         /*0170*/               @P0 MOV R6, R8 ;
+      [B------:R-:W-:-:S04]         /*0178*/               @P0 MOV R7, R9 ;
+      [B------:R-:W-:-:S07]         /*0188*/               @P0 IADD.X R13, R14, c[0x0][0x144] ;
+      [B-----5:R-:W-:-:S02]         /*0190*/               @P0 IADD32I R4, R4, 0x1 ;
+      [B------:R-:W-:-:S01]         /*0198*/               @P0 STG.E [R6], R4 ;
+      [B------:R0:W5:-:S01]         /*01a8*/                   LDG.E R10, [R12] ;
+      [B------:R-:W-:Y:S01]         /*01b0*/               @P0 IADD R8.CC, R11, c[0x0][0x150] ;
+      [B------:R-:W-:-:S01]         /*01b8*/                   SHL R2, R3.reuse, 0x2 ;
+      [B------:R-:W-:-:S04]         /*01c8*/                   SHF.L.U64 R11, R3, 0x2, R0 ;
+      [B------:R-:W-:-:S01]         /*01d0*/               @P0 IADD.X R9, R14, c[0x0][0x154] ;
+      [B0-----:R-:W-:-:S01]         /*01d8*/                   IADD R12.CC, R12, R2 ;
+      [B------:R-:W-:-:S04]         /*01e8*/                   MOV R6, R8 ;
+      [B------:R-:W-:Y:S01]         /*01f0*/                   MOV R7, R9 ;
+      [B------:R-:W-:-:S01]         /*01f8*/                   IADD.X R13, R13, R11.reuse ;
+      [B------:R-:W-:-:S01]         /*0208*/                   IADD R8.CC, R8, R2 ;
+      [B------:R-:W-:-:S01]         /*0210*/                   MOV32I R2, 0x1 ;
+      [B------:R-:W-:-:S04]         /*0218*/               @P0 MOV32I R2, 0x2 ;
+      [B------:R-:W-:-:S07]         /*0228*/                   IADD.X R9, R9, R11 ;
+      [B-----5:R-:W-:Y:S02]         /*0230*/                   IADD32I R4, R10, 0x1 ;
+      [B------:R0:W-:-:S01]         /*0238*/                   STG.E [R6], R4 ;
+      [B------:R-:W-:-:S13]         /*0248*/                   BRA `(.L_3) ;
+  .L_2:
+      [B------:R-:W-:-:S06]         /*0250*/                   MOV R2, RZ ;
+  .L_3:
+      [B0-----:R-:W-:-:S01]         /*0258*/                   MOV R6, R12 ;
+      [B------:R-:W-:-:S02]         /*0268*/                   MOV R7, R13 ;
+      [B------:R0:W5:-:S01]         /*0270*/                   LDG.E R4, [R6] ;
+      [B------:R-:W-:-:S01]         /*0278*/                   SHL R10, R3.reuse, 0x2 ;
+      [B------:R-:W-:-:S05]         /*0288*/                   SHF.L.U64 R0, R3, 0x2, R0 ;
+      [B------:R-:W-:Y:S01]         /*0290*/                   IADD R12.CC, R12, R10 ;
+      [B0-----:R-:W-:-:S05]         /*0298*/                   MOV R6, R8 ;
+      [B------:R-:W-:-:S01]         /*02a8*/                   IADD.X R13, R13, R0.reuse ;
+      [B------:R-:W-:-:S01]         /*02b0*/                   IADD R8.CC, R8, R10 ;
+      [B------:R-:W-:-:S05]         /*02b8*/                   MOV R7, R9 ;
+      [B------:R-:W-:-:S01]         /*02c8*/                   IADD.X R9, R9, R0 ;
+      [B------:R-:W-:Y:S06]         /*02d0*/                   IADD32I R0, R2, 0x1 ;
+      [B-----5:R-:W-:-:S02]         /*02d8*/                   IADD32I R4, R4, 0x1 ;
+      [B------:R0:W-:-:S04]         /*02e8*/                   STG.E [R6], R4 ;
+  .L_1:
+      [B------:R-:W-:Y:S13]         /*02f0*/                   ISETP.GE.U32.AND P0, PT, R5, 0x4, PT ;
+      [B------:R-:W-:Y:S15]         /*02f8*/                   NOP ;
+      [B------:R-:W-:Y:S04]         /*0308*/                   NOP ;
+      [B------:R-:W-:-:S13]         /*0310*/              @!P0 EXIT ;
+      [B------:R-:W-:-:S06]         /*0318*/                   IADD R2, -R0, c[0x0][0x14c] ;
+      [B------:R-:W-:Y:S01]         /*0328*/                   ISETP.GT.AND P1, PT, R2, 0xc, PT ;
+      [B------:R-:W-:-:S01]         /*0330*/                   PSETP.AND.AND P0, PT, PT, PT, PT ;
+      [B------:R-:W-:-:S11]         /*0338*/                   SHL R2, R3.reuse, 0x2 ;
+      [B------:R-:W-:-:S00]         /*0348*/         {         SHR R3, R3, 0x1e ;
+      [B------:R-:W-:-:S06]         /*0350*/              @!P1 BRA `(.L_4)         }
+      [B------:R-:W-:-:S01]         /*0358*/                   PSETP.AND.AND P0, PT, !PT, PT, PT ;
+      [B------:R-:W-:Y:S12]         /*0368*/                   IADD32I R5, R5, -0xc ;
+  .L_5:
+      [B0-----:R-:W-:-:S01]         /*0370*/                   MOV R6, R12 ;
+      [B------:R-:W-:-:S02]         /*0378*/                   MOV R7, R13 ;
+      [B------:R0:W5:-:S01]         /*0388*/                   LDG.E R4, [R6] ;
+      [B------:R-:W-:-:S06]         /*0390*/                   IADD R12.CC, R12, R2 ;
+      [B------:R-:W-:-:S01]         /*0398*/                   IADD.X R13, R13, R3 ;
+      [B0-----:R-:W-:Y:S01]         /*03a8*/                   MOV R6, R8 ;
+      [B------:R-:W-:-:S01]         /*03b0*/                   MOV R7, R9 ;
+      [B-----5:R-:W-:-:S02]         /*03b8*/                   IADD32I R4, R4, 0x1 ;
+      [B------:R-:W-:-:S01]         /*03c8*/                   STG.E [R6], R4 ;
+      [B------:R-:W5:-:S01]         /*03d0*/                   LDG.E R10, [R12] ;
+      [B------:R-:W-:-:S06]         /*03d8*/                   IADD R8.CC, R8, R2 ;
+      [B------:R-:W-:Y:S01]         /*03e8*/                   IADD.X R9, R9, R3 ;
+      [B------:R-:W-:-:S06]         /*03f0*/                   IADD R16.CC, R12, R2.reuse ;
+      [B------:R-:W-:-:S07]         /*03f8*/                   IADD.X R17, R13, R3 ;
+      [B-----5:R-:W-:-:S02]         /*0408*/                   IADD32I R10, R10, 0x1 ;
+      [B------:R-:W-:-:S01]         /*0410*/                   STG.E [R8], R10 ;
+      [B------:R-:W5:-:S01]         /*0418*/                   LDG.E R11, [R16] ;
+      [B------:R-:W-:Y:S06]         /*0428*/                   IADD R20.CC, R8, R2 ;
+      [B------:R-:W-:-:S01]         /*0430*/                   IADD.X R21, R9, R3.reuse ;
+      [B------:R-:W-:-:S06]         /*0438*/                   IADD R24.CC, R16, R2.reuse ;
+      [B------:R-:W-:-:S07]         /*0448*/                   IADD.X R25, R17, R3 ;
+      [B-----5:R-:W-:-:S02]         /*0450*/                   IADD32I R11, R11, 0x1 ;
+      [B------:R-:W-:-:S01]         /*0458*/                   STG.E [R20], R11 ;
+      [B------:R-:W5:-:S01]         /*0468*/                   LDG.E R4, [R24] ;
+      [B------:R-:W-:Y:S06]         /*0470*/                   IADD R12.CC, R20, R2 ;
+      [B------:R-:W-:-:S01]         /*0478*/                   IADD.X R13, R21, R3.reuse ;
+      [B------:R-:W-:-:S06]         /*0488*/                   IADD R8.CC, R24, R2.reuse ;
+      [B------:R-:W-:-:S07]         /*0490*/                   IADD.X R9, R25, R3 ;
+      [B-----5:R-:W-:-:S02]         /*0498*/                   IADD32I R6, R4, 0x1 ;
+      [B------:R-:W-:-:S01]         /*04a8*/                   STG.E [R12], R6 ;
+      [B------:R-:W5:-:S01]         /*04b0*/                   LDG.E R4, [R8] ;
+      [B------:R-:W-:Y:S06]         /*04b8*/                   IADD R16.CC, R12, R2 ;
+      [B------:R-:W-:-:S01]         /*04c8*/                   IADD.X R17, R13, R3.reuse ;
+      [B------:R-:W-:-:S06]         /*04d0*/                   IADD R20.CC, R8, R2.reuse ;
+      [B------:R-:W-:-:S07]         /*04d8*/                   IADD.X R21, R9, R3 ;
+      [B-----5:R-:W-:-:S02]         /*04e8*/                   IADD32I R7, R4, 0x1 ;
+      [B------:R-:W-:-:S01]         /*04f0*/                   STG.E [R16], R7 ;
+      [B------:R-:W5:-:S01]         /*04f8*/                   LDG.E R4, [R20] ;
+      [B------:R-:W-:Y:S06]         /*0508*/                   IADD R24.CC, R16, R2 ;
+      [B------:R-:W-:-:S01]         /*0510*/                   IADD.X R25, R17, R3.reuse ;
+      [B------:R-:W-:-:S06]         /*0518*/                   IADD R12.CC, R20, R2.reuse ;
+      [B------:R-:W-:-:S07]         /*0528*/                   IADD.X R13, R21, R3 ;
+      [B-----5:R-:W-:-:S02]         /*0530*/                   IADD32I R6, R4, 0x1 ;
+      [B------:R-:W-:-:S01]         /*0538*/                   STG.E [R24], R6 ;
+      [B------:R-:W5:-:S01]         /*0548*/                   LDG.E R4, [R12] ;
+      [B------:R-:W-:Y:S06]         /*0550*/                   IADD R8.CC, R24, R2 ;
+      [B------:R-:W-:-:S01]         /*0558*/                   IADD.X R9, R25, R3.reuse ;
+      [B------:R-:W-:-:S06]         /*0568*/                   IADD R16.CC, R12, R2.reuse ;
+      [B------:R-:W-:-:S07]         /*0570*/                   IADD.X R17, R13, R3 ;
+      [B-----5:R-:W-:-:S02]         /*0578*/                   IADD32I R7, R4, 0x1 ;
+      [B------:R-:W-:-:S01]         /*0588*/                   STG.E [R8], R7 ;
+      [B------:R-:W5:-:S01]         /*0590*/                   LDG.E R4, [R16] ;
+      [B------:R-:W-:Y:S06]         /*0598*/                   IADD R20.CC, R8, R2 ;
+      [B------:R-:W-:-:S01]         /*05a8*/                   IADD.X R21, R9, R3.reuse ;
+      [B------:R-:W-:-:S06]         /*05b0*/                   IADD R24.CC, R16, R2.reuse ;
+      [B------:R-:W-:-:S07]         /*05b8*/                   IADD.X R25, R17, R3 ;
+      [B-----5:R-:W-:-:S02]         /*05c8*/                   IADD32I R6, R4, 0x1 ;
+      [B------:R-:W-:-:S01]         /*05d0*/                   STG.E [R20], R6 ;
+      [B------:R-:W5:-:S01]         /*05d8*/                   LDG.E R4, [R24] ;
+      [B------:R-:W-:Y:S06]         /*05e8*/                   IADD R12.CC, R20, R2 ;
+      [B------:R-:W-:-:S01]         /*05f0*/                   IADD.X R13, R21, R3.reuse ;
+      [B------:R-:W-:-:S06]         /*05f8*/                   IADD R8.CC, R24, R2.reuse ;
+      [B------:R-:W-:-:S07]         /*0608*/                   IADD.X R9, R25, R3 ;
+      [B-----5:R-:W-:-:S02]         /*0610*/                   IADD32I R7, R4, 0x1 ;
+      [B------:R-:W-:-:S01]         /*0618*/                   STG.E [R12], R7 ;
+      [B------:R-:W5:-:S01]         /*0628*/                   LDG.E R4, [R8] ;
+      [B------:R-:W-:Y:S06]         /*0630*/                   IADD R16.CC, R12, R2 ;
+      [B------:R-:W-:-:S01]         /*0638*/                   IADD.X R17, R13, R3.reuse ;
+      [B------:R-:W-:-:S06]         /*0648*/                   IADD R20.CC, R8, R2.reuse ;
+      [B------:R-:W-:-:S07]         /*0650*/                   IADD.X R21, R9, R3 ;
+      [B-----5:R-:W-:-:S02]         /*0658*/                   IADD32I R6, R4, 0x1 ;
+      [B------:R-:W-:-:S01]         /*0668*/                   STG.E [R16], R6 ;
+      [B------:R-:W5:-:S01]         /*0670*/                   LDG.E R4, [R20] ;
+      [B------:R-:W-:Y:S06]         /*0678*/                   IADD R24.CC, R16, R2 ;
+      [B------:R-:W-:-:S01]         /*0688*/                   IADD.X R25, R17, R3.reuse ;
+      [B------:R-:W-:-:S06]         /*0690*/                   IADD R12.CC, R20, R2.reuse ;
+      [B------:R-:W-:-:S07]         /*0698*/                   IADD.X R13, R21, R3 ;
+      [B-----5:R-:W-:-:S02]         /*06a8*/                   IADD32I R7, R4, 0x1 ;
+      [B------:R-:W-:-:S01]         /*06b0*/                   STG.E [R24], R7 ;
+      [B------:R-:W5:-:S01]         /*06b8*/                   LDG.E R4, [R12] ;
+      [B------:R-:W-:Y:S06]         /*06c8*/                   IADD R8.CC, R24, R2 ;
+      [B------:R-:W-:-:S01]         /*06d0*/                   IADD.X R9, R25, R3.reuse ;
+      [B------:R-:W-:-:S06]         /*06d8*/                   IADD R16.CC, R12, R2.reuse ;
+      [B------:R-:W-:-:S07]         /*06e8*/                   IADD.X R17, R13, R3 ;
+      [B-----5:R-:W-:-:S02]         /*06f0*/                   IADD32I R6, R4, 0x1 ;
+      [B------:R-:W-:-:S01]         /*06f8*/                   STG.E [R8], R6 ;
+      [B------:R-:W5:-:S01]         /*0708*/                   LDG.E R4, [R16] ;
+      [B------:R-:W-:Y:S06]         /*0710*/                   IADD R20.CC, R8, R2 ;
+      [B------:R-:W-:-:S01]         /*0718*/                   IADD.X R21, R9, R3.reuse ;
+      [B------:R-:W-:-:S06]         /*0728*/                   IADD R24.CC, R16, R2.reuse ;
+      [B------:R-:W-:-:S07]         /*0730*/                   IADD.X R25, R17, R3 ;
+      [B-----5:R-:W-:-:S02]         /*0738*/                   IADD32I R7, R4, 0x1 ;
+      [B------:R-:W-:-:S01]         /*0748*/                   STG.E [R20], R7 ;
+      [B------:R-:W5:-:S01]         /*0750*/                   LDG.E R4, [R24] ;
+      [B------:R-:W-:Y:S06]         /*0758*/                   IADD R12.CC, R20, R2 ;
+      [B------:R-:W-:-:S01]         /*0768*/                   IADD.X R13, R21, R3.reuse ;
+      [B------:R-:W-:-:S06]         /*0770*/                   IADD R8.CC, R24, R2.reuse ;
+      [B------:R-:W-:-:S07]         /*0778*/                   IADD.X R9, R25, R3 ;
+      [B-----5:R-:W-:-:S02]         /*0788*/                   IADD32I R6, R4, 0x1 ;
+      [B------:R-:W-:-:S01]         /*0790*/                   STG.E [R12], R6 ;
+      [B------:R-:W5:-:S01]         /*0798*/                   LDG.E R4, [R8] ;
+      [B------:R-:W-:Y:S06]         /*07a8*/                   IADD R16.CC, R12, R2 ;
+      [B------:R-:W-:-:S01]         /*07b0*/                   IADD.X R17, R13, R3.reuse ;
+      [B------:R-:W-:-:S06]         /*07b8*/                   IADD R20.CC, R8, R2.reuse ;
+      [B------:R-:W-:-:S01]         /*07c8*/                   IADD.X R21, R9, R3 ;
+      [B------:R-:W-:Y:S13]         /*07d0*/                   IADD R24.CC, R16, R2 ;
+      [B-----5:R-:W-:-:S02]         /*07d8*/                   IADD32I R7, R4, 0x1 ;
+      [B------:R-:W-:-:S01]         /*07e8*/                   STG.E [R16], R7 ;
+      [B------:R-:W5:-:S01]         /*07f0*/                   LDG.E R4, [R20] ;
+      [B------:R-:W-:Y:S01]         /*07f8*/                   IADD32I R0, R0, 0x10 ;
+      [B------:R-:W-:-:S01]         /*0808*/                   IADD.X R25, R17, R3.reuse ;
+      [B------:R-:W-:-:S04]         /*0810*/                   IADD R12.CC, R20, R2.reuse ;
+      [B------:R-:W-:-:S02]         /*0818*/                   ISETP.GE.AND P1, PT, R0, R5, PT ;
+      [B------:R-:W-:-:S01]         /*0828*/                   IADD.X R13, R21, R3.reuse ;
+      [B------:R-:W-:-:S06]         /*0830*/                   IADD R8.CC, R24, R2 ;
+      [B------:R-:W-:Y:S07]         /*0838*/                   IADD.X R9, R25, R3 ;
+      [B-----5:R-:W-:-:S02]         /*0848*/                   IADD32I R6, R4, 0x1 ;
+      [B------:R0:W-:-:S01]         /*0850*/                   STG.E [R24], R6 ;
+      [B------:R-:W-:-:S13]         /*0858*/              @!P1 BRA `(.L_5) ;
+  .L_4:
+      [B0-----:R-:W-:-:S06]         /*0868*/                   IADD R4, -R0, c[0x0][0x14c] ;
+      [B------:R-:W-:Y:S13]         /*0870*/                   ISETP.GT.AND P1, PT, R4, 0x4, PT ;
+      [B------:R-:W-:-:S13]         /*0878*/              @!P1 BRA `(.L_6) ;
+      [B------:R-:W-:-:S01]         /*0888*/                   MOV R6, R12.reuse ;
+      [B------:R-:W-:-:S02]         /*0890*/                   MOV R7, R13.reuse ;
+      [B------:R0:W5:-:S01]         /*0898*/                   LDG.E R4, [R6] ;
+      [B------:R-:W-:-:S06]         /*08a8*/                   IADD R12.CC, R2, R12 ;
+      [B------:R-:W-:-:S01]         /*08b0*/                   IADD.X R13, R3, R13 ;
+      [B0-----:R-:W-:Y:S01]         /*08b8*/                   MOV R6, R8 ;
+      [B------:R-:W-:-:S01]         /*08c8*/                   MOV R7, R9.reuse ;
+      [B-----5:R-:W-:-:S02]         /*08d0*/                   IADD32I R11, R4, 0x1 ;
+      [B------:R-:W-:-:S01]         /*08d8*/                   STG.E [R6], R11 ;
+      [B------:R-:W5:-:S01]         /*08e8*/                   LDG.E R10, [R12] ;
+      [B------:R-:W-:-:S06]         /*08f0*/                   IADD R8.CC, R2, R8 ;
+      [B------:R-:W-:Y:S01]         /*08f8*/                   IADD.X R9, R3, R9 ;
+      [B------:R-:W-:-:S06]         /*0908*/                   IADD R4.CC, R12, R2.reuse ;
+      [B------:R-:W-:-:S07]         /*0910*/                   IADD.X R5, R13, R3 ;
+      [B-----5:R-:W-:-:S02]         /*0918*/                   IADD32I R10, R10, 0x1 ;
+      [B------:R-:W-:-:S01]         /*0928*/                   STG.E [R8], R10 ;
+      [B------:R-:W5:-:S01]         /*0930*/                   LDG.E R14, [R4] ;
+      [B------:R-:W-:Y:S06]         /*0938*/                   IADD R16.CC, R8, R2 ;
+      [B------:R-:W-:-:S01]         /*0948*/                   IADD.X R17, R9, R3.reuse ;
+      [B------:R-:W-:-:S06]         /*0950*/                   IADD R20.CC, R4, R2.reuse ;
+      [B------:R-:W-:-:S07]         /*0958*/                   IADD.X R21, R5, R3 ;
+      [B-----5:R-:W-:-:S02]         /*0968*/                   IADD32I R14, R14, 0x1 ;
+      [B------:R-:W-:-:S01]         /*0970*/                   STG.E [R16], R14 ;
+      [B------:R-:W5:-:S01]         /*0978*/                   LDG.E R6, [R20] ;
+      [B------:R-:W-:Y:S06]         /*0988*/                   IADD R12.CC, R16, R2 ;
+      [B------:R-:W-:-:S01]         /*0990*/                   IADD.X R13, R17, R3.reuse ;
+      [B------:R-:W-:-:S06]         /*0998*/                   IADD R8.CC, R20, R2.reuse ;
+      [B------:R-:W-:-:S07]         /*09a8*/                   IADD.X R9, R21, R3 ;
+      [B-----5:R-:W-:-:S02]         /*09b0*/                   IADD32I R6, R6, 0x1 ;
+      [B------:R-:W-:-:S01]         /*09b8*/                   STG.E [R12], R6 ;
+      [B------:R-:W5:-:S01]         /*09c8*/                   LDG.E R7, [R8] ;
+      [B------:R-:W-:Y:S06]         /*09d0*/                   IADD R4.CC, R12, R2 ;
+      [B------:R-:W-:-:S01]         /*09d8*/                   IADD.X R5, R13, R3.reuse ;
+      [B------:R-:W-:-:S06]         /*09e8*/                   IADD R16.CC, R8, R2.reuse ;
+      [B------:R-:W-:-:S07]         /*09f0*/                   IADD.X R17, R9, R3 ;
+      [B-----5:R-:W-:-:S02]         /*09f8*/                   IADD32I R7, R7, 0x1 ;
+      [B------:R-:W-:-:S01]         /*0a08*/                   STG.E [R4], R7 ;
+      [B------:R-:W5:-:S01]         /*0a10*/                   LDG.E R10, [R16] ;
+      [B------:R-:W-:Y:S06]         /*0a18*/                   IADD R20.CC, R4, R2 ;
+      [B------:R-:W-:-:S01]         /*0a28*/                   IADD.X R21, R5, R3.reuse ;
+      [B------:R-:W-:-:S06]         /*0a30*/                   IADD R24.CC, R16, R2.reuse ;
+      [B------:R-:W-:-:S07]         /*0a38*/                   IADD.X R25, R17, R3 ;
+      [B-----5:R-:W-:-:S02]         /*0a48*/                   IADD32I R10, R10, 0x1 ;
+      [B------:R-:W-:-:S01]         /*0a50*/                   STG.E [R20], R10 ;
+      [B------:R-:W5:-:S01]         /*0a58*/                   LDG.E R6, [R24] ;
+      [B------:R-:W-:Y:S06]         /*0a68*/                   IADD R28.CC, R20, R2 ;
+      [B------:R-:W-:-:S01]         /*0a70*/                   IADD.X R29, R21, R3.reuse ;
+      [B------:R-:W-:-:S06]         /*0a78*/                   IADD R4.CC, R24, R2.reuse ;
+      [B------:R-:W-:-:S01]         /*0a88*/                   IADD.X R5, R25, R3 ;
+      [B------:R-:W-:Y:S13]         /*0a90*/                   IADD R16.CC, R28, R2 ;
+      [B-----5:R-:W-:-:S02]         /*0a98*/                   IADD32I R6, R6, 0x1 ;
+      [B------:R-:W-:-:S01]         /*0aa8*/                   STG.E [R28], R6 ;
+      [B------:R-:W5:-:S01]         /*0ab0*/                   LDG.E R7, [R4] ;
+      [B------:R-:W-:Y:S01]         /*0ab8*/                   IADD.X R17, R29, R3 ;
+      [B------:R-:W-:-:S01]         /*0ac8*/                   IADD R12.CC, R4, R2.reuse ;
+      [B------:R-:W-:-:S01]         /*0ad0*/                   PSETP.AND.AND P0, PT, !PT, PT, PT ;
+      [B------:R-:W-:-:S04]         /*0ad8*/                   IADD32I R0, R0, 0x8 ;
+      [B------:R-:W-:-:S01]         /*0ae8*/                   IADD.X R13, R5, R3.reuse ;
+      [B------:R-:W-:-:S06]         /*0af0*/                   IADD R8.CC, R16, R2 ;
+      [B------:R-:W-:Y:S07]         /*0af8*/                   IADD.X R9, R17, R3 ;
+      [B-----5:R-:W-:-:S02]         /*0b08*/                   IADD32I R7, R7, 0x1 ;
+      [B------:R0:W-:-:S04]         /*0b10*/                   STG.E [R16], R7 ;
+  .L_6:
+      [B------:R-:W-:Y:S13]         /*0b18*/                   ISETP.LT.OR P0, PT, R0, c[0x0][0x14c], P0 ;
+      [B------:R-:W-:-:S13]         /*0b28*/              @!P0 EXIT ;
+      [B------:R-:W-:-:S00]         /*0b30*/         {         IADD R4.CC, R12, R2.reuse ;
+      [B------:R-:W5:-:S06]         /*0b38*/                   LDG.E R0, [R12]         }
+      [B------:R-:W-:-:S01]         /*0b48*/                   IADD.X R5, R13, R3 ;
+      [B0-----:R-:W-:Y:S13]         /*0b50*/                   IADD R16.CC, R8, R2 ;
+      [B-----5:R-:W-:-:S02]         /*0b58*/                   IADD32I R6, R0, 0x1 ;
+      [B------:R-:W-:-:S01]         /*0b68*/                   STG.E [R8], R6 ;
+      [B------:R-:W5:-:S01]         /*0b70*/                   LDG.E R0, [R4] ;
+      [B------:R-:W-:Y:S01]         /*0b78*/                   IADD.X R17, R9, R3 ;
+      [B------:R-:W-:-:S06]         /*0b88*/                   IADD R20.CC, R4, R2.reuse ;
+      [B------:R-:W-:-:S01]         /*0b90*/                   IADD.X R21, R5, R3 ;
+      [B------:R-:W-:Y:S13]         /*0b98*/                   IADD R12.CC, R16, R2 ;
+      [B-----5:R-:W-:-:S02]         /*0ba8*/                   IADD32I R10, R0, 0x1 ;
+      [B------:R-:W-:-:S01]         /*0bb0*/                   STG.E [R16], R10 ;
+      [B------:R-:W5:-:S01]         /*0bb8*/                   LDG.E R0, [R20] ;
+      [B------:R-:W-:Y:S01]         /*0bc8*/                   IADD.X R13, R17, R3 ;
+      [B------:R-:W-:-:S06]         /*0bd0*/                   IADD R6.CC, R20, R2.reuse ;
+      [B------:R-:W-:-:S07]         /*0bd8*/                   IADD.X R7, R21, R3 ;
+      [B-----5:R-:W-:-:S02]         /*0be8*/                   IADD32I R5, R0, 0x1 ;
+      [B------:R-:W-:-:S01]         /*0bf0*/                   STG.E [R12], R5 ;
+      [B------:R-:W5:-:S01]         /*0bf8*/                   LDG.E R6, [R6] ;
+      [B------:R-:W-:Y:S06]         /*0c08*/                   IADD R2.CC, R12, R2 ;
+      [B------:R-:W-:-:S07]         /*0c10*/                   IADD.X R3, R13, R3 ;
+      [B-----5:R-:W-:-:S02]         /*0c18*/                   IADD32I R0, R6, 0x1 ;
+      [B------:R-:W-:-:S01]         /*0c28*/                   STG.E [R2], R0 ;
+      [B------:R-:W-:-:S15]         /*0c30*/                   EXIT ;
+  .L_7:
+      [B------:R-:W-:-:S15]         /*0c38*/                   BRA `(.L_7) ;
+  .L_30:
+
+  //-------------------------------------------------
+  //---------------- END of sections ----------------
+  //-------------------------------------------------
+
+
+// Program segment PT_PHDR, 5 
+  .__segment  "PT_PHDR", 5 
+  .__segment_offset  0x1260   		// maybe updated by assembler 
+  .__segment_vaddr   0x0   		// Seems always 0? 
+  .__segment_paddr   0x0   		// ??? 
+  .__segment_filesz  0xa8   		// file size, maybe updated by assembler 
+  .__segment_memsz   0xa8   		// file size + nobits sections, maybe updated by assembler 
+  .__segment_align     8   		//  
+
+// Program segment PT_LOAD, 5 
+  .__segment  "PT_LOAD", 5 
+  .__segment_offset  0x2b8   		// maybe updated by assembler 
+  .__segment_vaddr   0x0   		// Seems always 0? 
+  .__segment_paddr   0x0   		// ??? 
+  .__segment_filesz  0xda8   		// file size, maybe updated by assembler 
+  .__segment_memsz   0xda8   		// file size + nobits sections, maybe updated by assembler 
+  .__segment_align     8   		//  
+  .__segment_startsection    ".nv.constant0._Z9matrixAddPKiiiPi"  		// first section in this segment 
+  .__segment_endsection      ".text._Z9matrixAddPKiiiPi"  		// last  section in this segment 
+
+// Program segment PT_LOAD, 6 
+  .__segment  "PT_LOAD", 6 
+  .__segment_offset  0x0   		// maybe updated by assembler 
+  .__segment_vaddr   0x0   		// Seems always 0? 
+  .__segment_paddr   0x0   		// ??? 
+  .__segment_filesz  0x0   		// file size, maybe updated by assembler 
+  .__segment_memsz   0x0   		// file size + nobits sections, maybe updated by assembler 
+  .__segment_align     8   		//  
+  .__segment_startsection    ""  		// first section in this segment 
+  .__segment_endsection      ""  		// last  section in this segment 
+
+
+  //-------------------------------------------------
+  //---------------- END of segments ----------------
+  //-------------------------------------------------
+
+

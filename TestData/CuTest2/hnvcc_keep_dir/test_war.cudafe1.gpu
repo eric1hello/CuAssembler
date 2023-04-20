@@ -1,0 +1,207 @@
+typedef char __nv_bool;
+# 2274 "/usr/local/cuda-11.0/bin/../targets/x86_64-linux/include/driver_types.h"
+struct CUstream_st;
+# 245 "/usr/include/x86_64-linux-gnu/bits/libio.h" 3
+struct _IO_FILE;
+# 216 "/usr/lib/gcc/x86_64-linux-gnu/7/include/stddef.h" 3
+typedef unsigned long size_t;
+#include "crt/device_runtime.h"
+# 7 "/usr/include/x86_64-linux-gnu/bits/types/FILE.h" 3
+typedef struct _IO_FILE FILE;
+# 231 "/usr/include/x86_64-linux-gnu/c++/7/bits/c++config.h" 3
+typedef unsigned long _ZSt6size_t;
+# 75 "/usr/local/cuda-11.0/bin/../targets/x86_64-linux/include/cuda_device_runtime_api.h"
+___device__(static  __no_sc__) enum cudaError cudaMalloc(void **, size_t);
+# 80 "/usr/local/cuda-11.0/bin/../targets/x86_64-linux/include/cuda_device_runtime_api.h"
+___device__(static  __no_sc__) enum cudaError cudaFuncGetAttributes(struct cudaFuncAttributes *, const void *);
+# 85 "/usr/local/cuda-11.0/bin/../targets/x86_64-linux/include/cuda_device_runtime_api.h"
+___device__(static  __no_sc__) enum cudaError cudaDeviceGetAttribute(int *, enum cudaDeviceAttr, int);
+# 90 "/usr/local/cuda-11.0/bin/../targets/x86_64-linux/include/cuda_device_runtime_api.h"
+___device__(static  __no_sc__) enum cudaError cudaGetDevice(int *);
+# 95 "/usr/local/cuda-11.0/bin/../targets/x86_64-linux/include/cuda_device_runtime_api.h"
+___device__(static  __no_sc__) enum cudaError cudaOccupancyMaxActiveBlocksPerMultiprocessor(int *, const void *, int, size_t);
+# 100 "/usr/local/cuda-11.0/bin/../targets/x86_64-linux/include/cuda_device_runtime_api.h"
+___device__(static  __no_sc__) enum cudaError cudaOccupancyMaxActiveBlocksPerMultiprocessorWithFlags(int *, const void *, int, size_t, unsigned);
+# 128 "/usr/local/cuda-11.0/bin/../targets/x86_64-linux/include/cuda_device_runtime_api.h"
+___device__(extern  __no_sc__) enum cudaError cudaGetLastError(void);
+# 130 "/usr/local/cuda-11.0/bin/../targets/x86_64-linux/include/cuda_device_runtime_api.h"
+___device__(extern  __no_sc__) const char *cudaGetErrorString(enum cudaError);
+# 143 "/usr/local/cuda-11.0/bin/../targets/x86_64-linux/include/cuda_device_runtime_api.h"
+___device__(extern  __no_sc__) enum cudaError cudaFree(void *);
+#if !defined(__CUDABE__)
+# 145 "/usr/local/cuda-11.0/bin/../targets/x86_64-linux/include/crt/common_functions.h"
+ __device_builtin__ ___device__(extern  __no_sc__) int printf(const char *__restrict__, ...);
+#endif
+# 149 "/usr/local/cuda-11.0/bin/../targets/x86_64-linux/include/crt/common_functions.h"
+___device__(extern  __no_sc__) __attribute__((__malloc__)) __attribute__((__nothrow__)) void *malloc(size_t);
+# 150 "/usr/local/cuda-11.0/bin/../targets/x86_64-linux/include/crt/common_functions.h"
+___device__(extern  __no_sc__) __attribute__((__nothrow__)) void free(void *);
+# 3297 "/usr/local/cuda-11.0/bin/../targets/x86_64-linux/include/crt/device_functions.h"
+___device__(extern  __no_sc__) unsigned __cudaPushCallConfiguration(struct dim3, struct dim3, size_t, struct CUstream_st *);
+# 7 "test_war.cu"
+__global__ __var_used__ extern void _Z9matrixAddPKiiiPi(const int *, int, int, int *);
+# 421 "/usr/local/cuda-11.0/bin/../targets/x86_64-linux/include/vector_types.h"
+___device__(static  __no_sc__) __inline__ void _ZN4dim3C1Ejjj(struct dim3 *const, unsigned, unsigned, unsigned);
+___device__(static  __no_sc__) __inline__ void _ZN4dim3C2Ejjj(struct dim3 *const, unsigned, unsigned, unsigned);
+#include "common_functions.h"
+# 75 "/usr/local/cuda-11.0/bin/../targets/x86_64-linux/include/cuda_device_runtime_api.h"
+___device__(static  __no_sc__) enum cudaError cudaMalloc(
+# 75 "/usr/local/cuda-11.0/bin/../targets/x86_64-linux/include/cuda_device_runtime_api.h"
+void **p, 
+# 75 "/usr/local/cuda-11.0/bin/../targets/x86_64-linux/include/cuda_device_runtime_api.h"
+size_t s){
+# 76 "/usr/local/cuda-11.0/bin/../targets/x86_64-linux/include/cuda_device_runtime_api.h"
+{
+# 77 "/usr/local/cuda-11.0/bin/../targets/x86_64-linux/include/cuda_device_runtime_api.h"
+return cudaErrorUnknown;
+# 78 "/usr/local/cuda-11.0/bin/../targets/x86_64-linux/include/cuda_device_runtime_api.h"
+}}
+# 80 "/usr/local/cuda-11.0/bin/../targets/x86_64-linux/include/cuda_device_runtime_api.h"
+___device__(static  __no_sc__) enum cudaError cudaFuncGetAttributes(
+# 80 "/usr/local/cuda-11.0/bin/../targets/x86_64-linux/include/cuda_device_runtime_api.h"
+struct cudaFuncAttributes *p, 
+# 80 "/usr/local/cuda-11.0/bin/../targets/x86_64-linux/include/cuda_device_runtime_api.h"
+const void *c){
+# 81 "/usr/local/cuda-11.0/bin/../targets/x86_64-linux/include/cuda_device_runtime_api.h"
+{
+# 82 "/usr/local/cuda-11.0/bin/../targets/x86_64-linux/include/cuda_device_runtime_api.h"
+return cudaErrorUnknown;
+# 83 "/usr/local/cuda-11.0/bin/../targets/x86_64-linux/include/cuda_device_runtime_api.h"
+}}
+# 85 "/usr/local/cuda-11.0/bin/../targets/x86_64-linux/include/cuda_device_runtime_api.h"
+___device__(static  __no_sc__) enum cudaError cudaDeviceGetAttribute(
+# 85 "/usr/local/cuda-11.0/bin/../targets/x86_64-linux/include/cuda_device_runtime_api.h"
+int *value, 
+# 85 "/usr/local/cuda-11.0/bin/../targets/x86_64-linux/include/cuda_device_runtime_api.h"
+enum cudaDeviceAttr attr, 
+# 85 "/usr/local/cuda-11.0/bin/../targets/x86_64-linux/include/cuda_device_runtime_api.h"
+int device){
+# 86 "/usr/local/cuda-11.0/bin/../targets/x86_64-linux/include/cuda_device_runtime_api.h"
+{
+# 87 "/usr/local/cuda-11.0/bin/../targets/x86_64-linux/include/cuda_device_runtime_api.h"
+return cudaErrorUnknown;
+# 88 "/usr/local/cuda-11.0/bin/../targets/x86_64-linux/include/cuda_device_runtime_api.h"
+}}
+# 90 "/usr/local/cuda-11.0/bin/../targets/x86_64-linux/include/cuda_device_runtime_api.h"
+___device__(static  __no_sc__) enum cudaError cudaGetDevice(
+# 90 "/usr/local/cuda-11.0/bin/../targets/x86_64-linux/include/cuda_device_runtime_api.h"
+int *device){
+# 91 "/usr/local/cuda-11.0/bin/../targets/x86_64-linux/include/cuda_device_runtime_api.h"
+{
+# 92 "/usr/local/cuda-11.0/bin/../targets/x86_64-linux/include/cuda_device_runtime_api.h"
+return cudaErrorUnknown;
+# 93 "/usr/local/cuda-11.0/bin/../targets/x86_64-linux/include/cuda_device_runtime_api.h"
+}}
+# 95 "/usr/local/cuda-11.0/bin/../targets/x86_64-linux/include/cuda_device_runtime_api.h"
+___device__(static  __no_sc__) enum cudaError cudaOccupancyMaxActiveBlocksPerMultiprocessor(
+# 95 "/usr/local/cuda-11.0/bin/../targets/x86_64-linux/include/cuda_device_runtime_api.h"
+int *numBlocks, 
+# 95 "/usr/local/cuda-11.0/bin/../targets/x86_64-linux/include/cuda_device_runtime_api.h"
+const void *func, 
+# 95 "/usr/local/cuda-11.0/bin/../targets/x86_64-linux/include/cuda_device_runtime_api.h"
+int blockSize, 
+# 95 "/usr/local/cuda-11.0/bin/../targets/x86_64-linux/include/cuda_device_runtime_api.h"
+size_t dynamicSmemSize){
+# 96 "/usr/local/cuda-11.0/bin/../targets/x86_64-linux/include/cuda_device_runtime_api.h"
+{
+# 97 "/usr/local/cuda-11.0/bin/../targets/x86_64-linux/include/cuda_device_runtime_api.h"
+return cudaErrorUnknown;
+# 98 "/usr/local/cuda-11.0/bin/../targets/x86_64-linux/include/cuda_device_runtime_api.h"
+}}
+# 100 "/usr/local/cuda-11.0/bin/../targets/x86_64-linux/include/cuda_device_runtime_api.h"
+___device__(static  __no_sc__) enum cudaError cudaOccupancyMaxActiveBlocksPerMultiprocessorWithFlags(
+# 100 "/usr/local/cuda-11.0/bin/../targets/x86_64-linux/include/cuda_device_runtime_api.h"
+int *numBlocks, 
+# 100 "/usr/local/cuda-11.0/bin/../targets/x86_64-linux/include/cuda_device_runtime_api.h"
+const void *func, 
+# 100 "/usr/local/cuda-11.0/bin/../targets/x86_64-linux/include/cuda_device_runtime_api.h"
+int blockSize, 
+# 100 "/usr/local/cuda-11.0/bin/../targets/x86_64-linux/include/cuda_device_runtime_api.h"
+size_t dynamicSmemSize, 
+# 100 "/usr/local/cuda-11.0/bin/../targets/x86_64-linux/include/cuda_device_runtime_api.h"
+unsigned flags){
+# 101 "/usr/local/cuda-11.0/bin/../targets/x86_64-linux/include/cuda_device_runtime_api.h"
+{
+# 102 "/usr/local/cuda-11.0/bin/../targets/x86_64-linux/include/cuda_device_runtime_api.h"
+return cudaErrorUnknown;
+# 103 "/usr/local/cuda-11.0/bin/../targets/x86_64-linux/include/cuda_device_runtime_api.h"
+}}
+#if !defined(__CUDABE__)
+#endif
+# 7 "test_war.cu"
+__global__ __var_used__ void _Z9matrixAddPKiiiPi(
+# 7 "test_war.cu"
+const int *data_a, 
+# 7 "test_war.cu"
+int lda, 
+# 7 "test_war.cu"
+int k, 
+# 7 "test_war.cu"
+int *data_o){
+# 7 "test_war.cu"
+{
+# 9 "test_war.cu"
+ int __cuda_local_var_22861_5_non_const_tid;
+# 10 "test_war.cu"
+ int __cuda_local_var_22862_5_non_const_bid;
+# 11 "test_war.cu"
+ int __cuda_local_var_22863_5_non_const_bdm;
+# 13 "test_war.cu"
+ const int *__cuda_local_var_22865_12_non_const_data_a_ptr;
+# 15 "test_war.cu"
+ int *__cuda_local_var_22867_6_non_const_data_o_ptr;
+# 9 "test_war.cu"
+__cuda_local_var_22861_5_non_const_tid = ((int)(threadIdx.x));
+# 10 "test_war.cu"
+__cuda_local_var_22862_5_non_const_bid = ((int)(blockIdx.x));
+# 11 "test_war.cu"
+__cuda_local_var_22863_5_non_const_bdm = ((int)(blockDim.x));
+# 13 "test_war.cu"
+__cuda_local_var_22865_12_non_const_data_a_ptr = ((data_a + (__cuda_local_var_22862_5_non_const_bid * __cuda_local_var_22863_5_non_const_bdm)) + __cuda_local_var_22861_5_non_const_tid);
+# 15 "test_war.cu"
+__cuda_local_var_22867_6_non_const_data_o_ptr = ((data_o + (__cuda_local_var_22862_5_non_const_bid * __cuda_local_var_22863_5_non_const_bdm)) + __cuda_local_var_22861_5_non_const_tid);
+# 17 "test_war.cu"
+{
+# 17 "test_war.cu"
+ int i;
+# 17 "test_war.cu"
+i = 0;
+# 17 "test_war.cu"
+for (; (i < k); i++)
+# 17 "test_war.cu"
+{
+# 18 "test_war.cu"
+ int __cuda_local_var_22870_7_non_const_tmp;
+# 18 "test_war.cu"
+__cuda_local_var_22870_7_non_const_tmp = (*__cuda_local_var_22865_12_non_const_data_a_ptr);
+# 19 "test_war.cu"
+__cuda_local_var_22865_12_non_const_data_a_ptr += lda;
+# 20 "test_war.cu"
+(*__cuda_local_var_22867_6_non_const_data_o_ptr) = (__cuda_local_var_22870_7_non_const_tmp + 1);
+# 21 "test_war.cu"
+__cuda_local_var_22867_6_non_const_data_o_ptr += lda;
+# 22 "test_war.cu"
+} } 
+# 23 "test_war.cu"
+}}
+__asm__(".align 2");
+# 421 "/usr/local/cuda-11.0/bin/../targets/x86_64-linux/include/vector_types.h"
+___device__(static  __no_sc__) __inline__ void _ZN4dim3C1Ejjj( struct dim3 *const this, 
+# 421 "/usr/local/cuda-11.0/bin/../targets/x86_64-linux/include/vector_types.h"
+unsigned vx, 
+# 421 "/usr/local/cuda-11.0/bin/../targets/x86_64-linux/include/vector_types.h"
+unsigned vy, 
+# 421 "/usr/local/cuda-11.0/bin/../targets/x86_64-linux/include/vector_types.h"
+unsigned vz){
+# 421 "/usr/local/cuda-11.0/bin/../targets/x86_64-linux/include/vector_types.h"
+{
+# 421 "/usr/local/cuda-11.0/bin/../targets/x86_64-linux/include/vector_types.h"
+(this->x) = vx;
+# 421 "/usr/local/cuda-11.0/bin/../targets/x86_64-linux/include/vector_types.h"
+(this->y) = vy;
+# 421 "/usr/local/cuda-11.0/bin/../targets/x86_64-linux/include/vector_types.h"
+(this->z) = vz; 
+# 421 "/usr/local/cuda-11.0/bin/../targets/x86_64-linux/include/vector_types.h"
+}}
+__asm__(".align 2");
+___device__(static  __no_sc__) __inline__ void _ZN4dim3C2Ejjj( struct dim3 *const this,  unsigned __T0,  unsigned __T1,  unsigned __T2){ {  _ZN4dim3C1Ejjj(this, __T0, __T1, __T2);  }}

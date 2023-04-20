@@ -257,3 +257,24 @@ Less likely to support, but still on the plan:
 * More robust parsing and user friendly error reporting.
 * Control flow support? May also be achieved by preprocessing in python?
 * And others...
+
+原代码来自
+https://github.com/cloudcores/CuAssembler
+这个根据自己目录做了简要修改
+
+使用说明
+
+在工程目录下创建一个cu文件，例如cudatest.cu。
+-- 将CuAssembler/bin/makefile复制到工程目录，将其中的BASENAME修改为前面的文件名（这里是BASENAME=cudatest）。将ARCH变量设置为要编译的SM版本，这里假设是ARCH=sm_75。如果需要处理额外的include或link文件，修改对应的$INCLUDE 和 $LINK 变量即可。
+-- 运行make d2h，其中 d2h 表示 "dump to hack"。这会生成3个新文件：
+-- dump.cudatest.sm_75.cubin : 由原始输入 cudatest.cu 编译生成的cubin文件.
+-- dump.cudatest.sm_75.cuasm : 原始cubin的反汇编文件.
+-- hack.cudatest.sm_75.cuasm : 原始反汇编dump.cudatest.sm_75.cuasm的副本，方便用户修改.
+-- 根据用户需求修改hack.cudatest.sm_75.cuasm。
+-- 运行make hack。这会将用户修改后的 hack.cudatest.sm_75.cuasm 汇编为 hack.cudatest.sm_75.cubin，用它替换原编译链中的cudatest.sm_75.cubin，最终生成可执行文件cudatest。
+-- 得到最终可执行文件cudatest后，就可以按原来的方式运行，例如./cudatest。
+-- 整个过程与通常开发方式比较接近，也不用专门写driver api相关接口去调用cubin。
+
+一些提示： 1. 由于 CuAssembler 当前的功能限制，cuasm所有的接口需要继承自原cubin文件，所以需要修改kernel参数、全局变量、constant memory配置时，需要重新make d2h生成新的cuasm并在此基础上重新修改。不过由于cuasm是文本格式，用户可以使用一些版本控制软件尽量减少重复修改的部分。 2. 这个方式比较适合独立的CUDA程序，如果需要修改大型程序（比如多个cu文件）的一部分，nvcc的参数和编译链条会较为复杂，存在较多风险；
+
+

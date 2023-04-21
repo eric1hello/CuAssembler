@@ -73,10 +73,10 @@ def checkOutFileBackup(fname, doBackup=True):
 
 def run(args, doCheck=True, outputToNull=True):
     try:
-     #   print('\nargs is \n',args)
+        print('\nargs is \n',args)
         out_b = check_output(args,timeout=5,stderr=STDOUT)
         out_s = out_b.decode().strip()
-        res = 0,out_s.replace('cicc ','/usr/local/cuda/nvvm/bin/cicc ')
+        res = 0,out_s
     except CalledProcessError as cpe:
         print(f'Error when running {args}')
         print(cpe.output.decode())
@@ -104,7 +104,8 @@ def doHackOrDump(args, op):
     # make args for dryrun, get command list
     args_dryrun = args.copy()
     args_dryrun[0] = 'nvcc'
-    args_dryrun.extend(['-keep', f'-keep-dir={KEEP_DIR}', '-dryrun'])
+    args_dryrun.extend(['--cudart', 'shared'])
+    args_dryrun.extend(['-O0', '-Xcicc', '-O0', '-Xptxas', '-O2', '-keep', f'-keep-dir={KEEP_DIR}', '-dryrun'])
     
     print('#### Getting command list...')
     _, out_s = run(args_dryrun) # get command list of nvcc

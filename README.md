@@ -277,4 +277,9 @@ https://github.com/cloudcores/CuAssembler
 
 一些提示： 1. 由于 CuAssembler 当前的功能限制，cuasm所有的接口需要继承自原cubin文件，所以需要修改kernel参数、全局变量、constant memory配置时，需要重新make d2h生成新的cuasm并在此基础上重新修改。不过由于cuasm是文本格式，用户可以使用一些版本控制软件尽量减少重复修改的部分。 2. 这个方式比较适合独立的CUDA程序，如果需要修改大型程序（比如多个cu文件）的一部分，nvcc的参数和编译链条会较为复杂，存在较多风险；
 
+#<<<<cuassemble setting<<<<<<<<
+  export PATH=${PATH}:./CuAssembler/bin
+  export PYTHONPATH=${PYTHOPATH}:./CuAssembler/
+  export PATH=$PATH:/usr/local/cuda/nvvm/bin
+
 
